@@ -20,6 +20,7 @@ namespace IOA.API
             Configuration = configuration;
         }
 
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -30,6 +31,18 @@ namespace IOA.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOA.API", Version = "v1" });
+                //添加全局安全条件
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+         {
+              {
+            new OpenApiSecurityScheme{
+                Reference = new OpenApiReference {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"}
+            },new string[] { }
+        }
+    });
+              
             });
         }
 
