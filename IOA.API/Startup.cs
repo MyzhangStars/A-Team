@@ -1,3 +1,5 @@
+using IOA.IRepository;
+using IOA.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,8 +28,11 @@ namespace IOA.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddSession();
             services.AddControllers();
+            services.AddSingleton<ILoginRepository, LoginRepository>();
+            services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOA.API", Version = "v1" });
@@ -56,6 +61,7 @@ namespace IOA.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IOA.API v1"));
             }
 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
