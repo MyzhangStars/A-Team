@@ -1,4 +1,5 @@
-﻿using IOA.IRepository;
+﻿using IOA.Common;
+using IOA.IRepository;
 using IOA.Model;
 using IOA.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace IOA.Web.Controllers
 {
     public class HomeController : Controller
     {
-
+     
         public readonly IHomeRepositroy _ihomeRepositroy;
         public HomeController(IHomeRepositroy ihomeRepositroy)
         {
@@ -26,35 +27,57 @@ namespace IOA.Web.Controllers
             StringBuilder leftData = new StringBuilder();
             //获取左侧菜单栏
             List<MenuModel> left = _ihomeRepositroy.leftData(parentID);
-
+            //获取全部菜单
+            List<MenuModel> leftNext = _ihomeRepositroy.Show("select * from MenuModel");
 
             foreach (var item in left)
             {
                 leftData.Append("<li data-name = 'home' class='layui-nav-item layui-nav-itemed'>");
                 leftData.Append($"<a href = 'javascript:;'  lay-direction = '2' >");
-                leftData.Append($"<cite>{item.MenuName}</cite>");
-                leftData.Append("</a></li>");
+                leftData.Append($"<cite>{item.MenuName}</cite></a>");
+                foreach (var itemNext in leftNext)
+                {
+                    if (itemNext.MenuParentID.Equals(item.MenuId))
+                    {
+                        leftData.Append("<dl class='layui-nav-child'>");
+                        leftData.Append("<dd class='layui-nav-itemed'>");
+                        leftData.Append($"<a href ='javascript:;'>{itemNext.MenuName}</a>");
+                        foreach (var itemNext2 in leftNext)
+                        {
+                            if (itemNext2.MenuParentID.Equals(itemNext.MenuId))
+                            {
+                                leftData.Append("<dl class='layui-nav-child'>");
+                                if (itemNext2.MenuLink == null || itemNext2.MenuLink == "")
+                                {
+                                    itemNext2.MenuLink = "javascript:;";
+                                }
+                                    leftData.Append($"<dd><a lay-href='{itemNext2.MenuLink}'>{itemNext2.MenuName}</a></dd>");
+                                    leftData.Append("</dl>");
+                                
+                            }
+}
+                        leftData.Append("</dd></dl>");
+                    }
+                }
+                leftData.Append("</li>");
             }
 
             ViewBag.LeftMenu = leftData.ToString();
 
-            if (item.MenuLink == null || item.MenuLink == "")
-            {
-                item.MenuLink = "javascript:;";
-            }
+            
 
 
             return View();
         }
 
-          <dl class="layui-nav-child">
-                                <dd class="layui-nav-itemed">
-                                    <a href = "javascript:;" > 系统设置 </ a >
-                                    < dl class="layui-nav-child">
-                                        <dd><a lay-href="set/system/website.html">网站设置</a></dd>
-                                        <dd><a lay-href="set/system/email.html">邮件服务</a></dd>
-                                    </dl>
-                                </dd>
+          
+                                
+                                    
+                                    //< dl class="layui-nav-child">
+                                    //    <dd><a lay-href="set/system/website.html">网站设置</a></dd>
+                                    //    <dd><a lay-href="set/system/email.html">邮件服务</a></dd>
+                                    
+                                
         public IActionResult Class()
         {
             return View();
