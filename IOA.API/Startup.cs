@@ -1,3 +1,4 @@
+using IOA.Common;
 using IOA.IRepository;
 using IOA.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +33,9 @@ namespace IOA.API
             services.AddControllers();
             services.AddSingleton<ILoginRepository, LoginRepository>();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
-            
+            ConfigurationHepler.configurations = Configuration.GetConnectionString("connStr");
+
+
 
             services.AddSwaggerGen(c =>
             {
