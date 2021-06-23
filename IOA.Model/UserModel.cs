@@ -19,7 +19,7 @@ namespace IOA.Model
         private int _userdeletemark;//删除标记(1未删 0已除 默认为1)
         private int _userisadmin;//是否系统管理员（默认为0）
         private string _usercreatename;//添加人（默认当前用户）
-        private DateTime _usercreatedate;//添加日期 （当前时间）
+        private DateTime _usercreatedate=DateTime.Now;//添加日期 （当前时间）
 
         #region 用户工号 UserId
         /// <summary>

@@ -32,6 +32,7 @@ namespace IOA.API
             services.AddControllers();
             services.AddSingleton<ILoginRepository, LoginRepository>();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
+            
 
             services.AddSwaggerGen(c =>
             {
