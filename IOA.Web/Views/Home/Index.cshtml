@@ -22,18 +22,18 @@
                 <ul class="layui-nav layui-layout-left">
 
                     <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                        <a href="http://www.baidu.com/" target="_blank" title="首页">
+                        <a href="http://www.baidu.com/" target="ifr" title="首页">
                             <i class="layui-icon layui-icon-home"></i>
                         </a>
                     </li>
                     <li class="layui-nav-item" lay-unselect>
-                        <a href="javascript:;" layadmin-event="refresh" title="刷新">
+                        <a href="/Home/Index" layadmin-event="refresh" title="刷新">
                             <i class="layui-icon layui-icon-refresh-3"></i>
                         </a>
                     </li>
-                    <li class="layui-nav-item layui-hide-xs"><a href=""> <i class="layui-icon layui-icon-username" style="font-size: 30px; color:red;"></i>个人中心</a></li>
-                    <li class="layui-nav-item layui-hide-xs"><a href=""><i class="layui-icon layui-icon-component" style="font-size: 30px; color:red;"></i>任务管理</a></li>
-                    <li class="layui-nav-item layui-hide-xs"><a href="" onclick="DisPlayMEnu(0)"><i class="layui-icon layui-icon-app" style="font-size: 30px; color:red;"></i>全部应用</a></li>
+                    <li class="layui-nav-item layui-hide-xs"><a href="javascript:DisPlayMEnu(1);" > <i class="layui-icon layui-icon-username" style="font-size: 30px; color:red;"></i>个人中心</a></li>
+                    <li class="layui-nav-item layui-hide-xs"><a href="javascript:DisPlayMEnu(4);" ><i class="layui-icon layui-icon-component" style="font-size: 30px; color:red;"></i>任务管理</a></li>
+                    <li class="layui-nav-item layui-hide-xs"><a href="javascript:DisPlayMEnu(0);"><i class="layui-icon layui-icon-app" style="font-size: 30px; color:red;"></i>全部应用</a></li>
 
                     <li class="layui-nav-item layui-hide-xs" lay-unselect>
                         <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords=">
@@ -129,7 +129,7 @@
             <!-- 主体内容 -->
             <div class="layui-body" id="LAY_app_body">
                 <div class="layadmin-tabsbody-item layui-show">
-                    <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+                    <iframe name="ifr" width="100%" height="100%"></iframe>
                 </div>
             </div>
 
