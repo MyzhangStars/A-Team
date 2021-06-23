@@ -10,8 +10,4 @@
     <ProjectReference Include="..\IOA.Repository\IOA.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Team\" />
-  </ItemGroup>
-
 </Project>

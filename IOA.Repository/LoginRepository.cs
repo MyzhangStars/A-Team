@@ -16,10 +16,5 @@ namespace IOA.Repository
             List<UserModel> data = DapperHelper<UserModel>.Query(sql, new { @userName = userName, userPwd = userPwd });
             return data;
         }
-
-        UserModel ILoginRepository.LookingFor(string userName, string userPwd)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
