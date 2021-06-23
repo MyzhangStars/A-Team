@@ -11,6 +11,7 @@ namespace Repositroy
         public List<T> Show(string sql, object param = null)
         {
             List<T> data = DapperHelper<T>.Query(sql, param);
+
             return data;
         }
 

@@ -25,9 +25,12 @@ namespace IOA.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            
+            ConfigurationHepler.configurations = Configuration.GetConnectionString("connStr");
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +48,7 @@ namespace IOA.Web
 
             app.UseRouting();
 
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

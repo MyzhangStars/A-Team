@@ -33,24 +33,43 @@ namespace IOA.API
             services.AddControllers();
             services.AddSingleton<ILoginRepository, LoginRepository>();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
+            ConfigurationHepler.configurations = Configuration.GetConnectionString("connStr");
 
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("any", builder =>
+                 {
+                     builder.AllowAnyOrigin()  //允许任何来源的主机访问
+                     .AllowAnyMethod()
+                     .AllowAnyHeader()
+                     .AllowCredentials(); //指定处理cookie
+                 });
+            });
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOA.API", Version = "v1" });
-                //添加全局安全条件
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-         {
-              {
-            new OpenApiSecurityScheme{
-                Reference = new OpenApiReference {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"}
-            },new string[] { }
-        }
-    });
-              
+                ////启用swagger验证功能
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Description = "在下框中输入请求头需要添加JWT授权 Token：Bearer Token",
+                    Name = "Authorization",//jwt默认的参数名称
+                    In = ParameterLocation.Header,//jwt默认存放authorization信息的位置（请求头中）
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                        c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOA.API", Version = "v1" });
+                        //添加全局安全条件
+                  c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                   {
+                     {
+                       new OpenApiSecurityScheme{
+                            Reference = new OpenApiReference {
+                                        Type = ReferenceType.SecurityScheme,
+                                        Id = "Bearer"}
+                        },new string[] { }
+                       }
+                   });
             });
         }
 
