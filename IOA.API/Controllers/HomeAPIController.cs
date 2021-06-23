@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace IOA.API.Controllers
 {
-    public class HomeAPIController : Controller
+    public class HomeController : Controller
     {
         public readonly IHomeRepositroy _ihomeRepositroy;
-        public HomeAPIController(IHomeRepositroy ihomeRepositroy)
+        public HomeController(IHomeRepositroy ihomeRepositroy)
         {
             _ihomeRepositroy = ihomeRepositroy;
         }

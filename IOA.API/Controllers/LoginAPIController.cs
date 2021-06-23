@@ -11,10 +11,10 @@ using Newtonsoft.Json;
 
 namespace IOA.API.Controllers
 {
-    public class LoginAPIController : Controller
+    public class LoginController : Controller
     {
         public readonly ILoginRepository _iloginRepository;
-        public LoginAPIController(ILoginRepository iloginRepository)
+        public LoginController(ILoginRepository iloginRepository)
         {
             _iloginRepository = iloginRepository;
         }

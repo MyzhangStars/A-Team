@@ -15,7 +15,8 @@ namespace IOA.Common
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
-        private static readonly string connectionString = "Data Source=.;Initial Catalog=OA;Integrated Security=True";
+        private static readonly string connectionString =
+            "Data Source=.;Initial Catalog=OA;Integrated Security=True";
 
         /// <summary>
         /// 查询列表
