@@ -18,7 +18,8 @@ namespace IOA.API.Controllers
         {
             _iloginRepository = iloginRepository;
         }
-        //生成验证码
+
+        #region  //生成验证码
         public IActionResult VerificationCode()
         {
             string code = VerificationCodeHelper.CreateValidateCode(4);
@@ -26,14 +27,16 @@ namespace IOA.API.Controllers
             HttpContext.Session.SetString("code", code);
             return File(file, @"/image/jpg");
         }
-        //登录方法
-        public IActionResult Login(string userName=null,string userPwd=null,string code=null)
+        #endregion
+
+        #region //登录方法
+        public IActionResult Login(string userName = null, string userPwd = null, string code = null)
         {
             int num;
             if (HttpContext.Session.GetString("code").ToString().ToLower().Equals(code.ToLower()))
             {
                 UserModel list = _iloginRepository.LookingFor(userName, userPwd);
-                if (list!=null)
+                if (list != null)
                 {
                     num = 1;  //登录成功
                     HttpContext.Session.SetString("userID", list.UserId.ToString());
@@ -49,13 +52,18 @@ namespace IOA.API.Controllers
             }
             return Ok(num);
         }
-        //注册
+
+        #endregion
+
+        #region //注册
+
         public IActionResult Registered(string userModel)
         {
             UserModel list = JsonConvert.DeserializeObject<UserModel>(userModel);
-            string sql= "insert into UserModel values('@userName','@userPwd','@userSex','@userCard','@userPhone','@userNational','@userEmail','@userMajor','@userJoinInDate','@userDimissionDate','@userDimissionCause','@userDeleteMark','@userIsAdmin','@userCreateName','@userCreateDate')";
-            int i = _iloginRepository.ZSG(sql,new {
-                @userName=list.UserName,
+            string sql = "insert into UserModel values('@userName','@userPwd','@userSex','@userCard','@userPhone','@userNational','@userEmail','@userMajor','@userJoinInDate','@userDimissionDate','@userDimissionCause','@userDeleteMark','@userIsAdmin','@userCreateName','@userCreateDate')";
+            int i = _iloginRepository.ZSG(sql, new
+            {
+                @userName = list.UserName,
                 @userPwd = list.UserPwd,
                 @userSex = list.UserSex,
                 @userCard = list.UserCard,
@@ -73,5 +81,6 @@ namespace IOA.API.Controllers
             });
             return Ok(i);
         }
+        #endregion
     }
 }

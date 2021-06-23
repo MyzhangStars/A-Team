@@ -22,6 +22,9 @@ namespace IOA.Web.Controllers
             _ihomeRepositroy = ihomeRepositroy;
         }
 
+
+
+
         public IActionResult Index(int parentID )
         {
             StringBuilder leftData = new StringBuilder();
@@ -70,12 +73,6 @@ namespace IOA.Web.Controllers
         {
             return View();
         }
-        //拼接左侧菜单
-        public IActionResult LeftMenu(int parentID)
-        {
-            
-            return View();
-        }
-
+      
     }
 }
