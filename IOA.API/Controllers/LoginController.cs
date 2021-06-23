@@ -18,14 +18,14 @@ namespace IOA.API.Controllers
         {
             _iloginRepository = iloginRepository;
         }
-        ////生成验证码
-        //public IActionResult VerificationCode()
-        //{
-        //    string code = VerificationCodeHelper.CreateValidateCode(4);
-        //    var file = VerificationCodeHelper.CreateValidateGraphic(code);
-        //    HttpContext.Session.SetString("code", code);
-        //    return File(file, @"/image/jpg");
-        //}
+        //生成验证码
+        public IActionResult VerificationCode()
+        {
+            string code = VerificationCodeHelper.CreateValidateCode(4);
+            var file = VerificationCodeHelper.CreateValidateGraphic(code);
+            HttpContext.Session.SetString("code", code);
+            return File(file, @"/image/jpg");
+        }
         //登录方法
         public IActionResult Login(string userName=null,string userPwd=null,string code=null)
         {

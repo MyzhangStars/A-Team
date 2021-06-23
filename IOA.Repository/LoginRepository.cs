@@ -10,10 +10,10 @@ namespace IOA.Repository
     public class LoginRepository : BaseRepositroy<UserModel>, ILoginRepository
     {
         //数据库查登录名称 和密码
-        public List<UserModel> LookingFor(string userName, string userPwd)
+        public UserModel LookingFor(string userName, string userPwd)
         {
             string sql = "select * from UserModel where UserName=@userName and UserPwd=@UserPwd";
-            List<UserModel> data = DapperHelper<UserModel>.Query(sql, new { @userName = userName, userPwd = userPwd });
+            UserModel data = DapperHelper<UserModel>.QueryFirst(sql, new { @userName = userName, userPwd = userPwd });
             return data;
         }
     }

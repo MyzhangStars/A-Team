@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>button</title>
+    <link href="~/Scripts/layui-v2.6.8/layui/css/layui.css" rel="stylesheet" />
+    <style>
+        blockquote {
+            margin-top: 10px;
+        }
+
+        .site-demo-button .layui-btn {
+            margin: 0 7px 10px 10px;
+        }
+
+        .layui-form-item {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .layui-row {
+            background: #ffffff;
+            opacity: 0.8;
+            display: block;
+            padding: 5% 0 5% 45%;
+            width: 100%;
+            margin-top: 10%;
+        }
+
+        body {
+            background: url(images/u0.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .layui-input-inline img {
+            position: absolute;
+            margin-top: 8px;
+            margin-left: 15px;
+            width: 15px;
+            height: 20px;
+        }
+
+        .layui-input-inline input {
+            text-indent: 2em;
+        }
+
+        .layui-inline {
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <img src="images/u13.png" />
+                    <input type="text" name="username" lay-verify="required|username" autocomplete="off" class="layui-input" placeholder="用户名">
+                </div>
+            </div>
+            <br />
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <img src="images/u11.png" />
+                    <input type="password" name="password" lay-verify="required|password" autocomplete="off" class="layui-input" placeholder="密码">
+                </div>
+            </div>
+            <br />
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <img src="images/u11.png" />
+                    <input type="text" name="code" lay-verify="required|code" autocomplete="off" class="layui-input" placeholder="验证码">
+                    <img src="/Login/" alt="" />
+                </div>
+            </div>
+            <br />
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-danger" style="width: 190px;">登录</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/layui-v2.6.8/layui/layui.js"></script>
+
+</html>
