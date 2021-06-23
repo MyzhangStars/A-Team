@@ -52,7 +52,6 @@ namespace IOA.Web.Controllers
                                 }
                                 leftData.Append($"<dd><a lay-href='{itemNext2.MenuLink}'>{itemNext2.MenuName}</a></dd>");
                                 leftData.Append("</dl>");
-
                             }
                         }
                         leftData.Append("</dd></dl>");
