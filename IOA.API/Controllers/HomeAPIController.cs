@@ -15,7 +15,7 @@ namespace IOA.API.Controllers
     [ApiController]
     [Route("HomeAPI")]
     //设置跨域处理的 代理  如果在控制器内的所以都有对应的跨域限制
-    [EnableCors("any")]  //如果在方法头则方法限制
+    /*[EnableCors("any")]*/  //如果在方法头则方法限制
     public class HomeAPIController : Controller
     {
         //实例化
@@ -25,35 +25,30 @@ namespace IOA.API.Controllers
             _ihomeRepositroy = ihomeRepositroy;
         }
 
-
         #region //点击全部应用 显示左边
         [Route(nameof(Index))]
-        public IActionResult Index(int parentID)
+        [HttpGet]
+        public string Index(int parentID)
         {
-            StringBuilder leftData = new StringBuilder();
-            //获取左侧菜单栏
-            List<MenuModel> left = _ihomeRepositroy.leftData(parentID);
+            //int userId = Convert.ToInt32(HttpContext.Session.GetString("userID"));
+            //ViewBag.userName = HttpContext.Session.GetString("userName");
             //获取全部菜单
             List<MenuModel> leftNext = _ihomeRepositroy.Show("select * from MenuModel");
-
-            //循环顶级菜单栏
+            //获取左侧菜单栏
+            List<MenuModel> left = _ihomeRepositroy.leftData(1,parentID);
+            StringBuilder leftData = new StringBuilder();
             foreach (var item in left)
             {
-                //拼接
                 leftData.Append("<li data-name = 'home' class='layui-nav-item layui-nav-itemed'>");
                 leftData.Append($"<a href = 'javascript:;'  lay-direction = '2' >");
                 leftData.Append($"<cite>{item.MenuName}</cite></a>");
-                //循环所有菜单栏
                 foreach (var itemNext in leftNext)
                 {
-                    //判断菜单栏的子节点
                     if (itemNext.MenuParentID.Equals(item.MenuId))
                     {
-                        //拼接
                         leftData.Append("<dl class='layui-nav-child'>");
                         leftData.Append("<dd class='layui-nav-itemed'>");
                         leftData.Append($"<a href ='javascript:;'>{itemNext.MenuName}</a>");
-                        //判断菜单栏的子节点
                         foreach (var itemNext2 in leftNext)
                         {
                             if (itemNext2.MenuParentID.Equals(itemNext.MenuId))
@@ -63,8 +58,23 @@ namespace IOA.API.Controllers
                                 {
                                     itemNext2.MenuLink = "javascript:;";
                                 }
-                                leftData.Append($"<dd><a lay-href='{itemNext2.MenuLink}'>{itemNext2.MenuName}</a></dd>");
-                                leftData.Append("</dl>");
+                                leftData.Append($"<dd><a lay-href='{itemNext2.MenuLink}'>{itemNext2.MenuName}</a>");
+                                foreach (var itemNext3 in leftNext)
+                                {
+                                    if (itemNext3.MenuParentID.Equals(itemNext2.MenuId))
+                                    {
+                                        leftData.Append("<dl class='layui-nav-child'>");
+                                        if (itemNext3.MenuLink == null || itemNext3.MenuLink == "")
+                                        {
+                                            itemNext3.MenuLink = "javascript:;";
+                                        }
+                                        leftData.Append($"<dd><a lay-href='{itemNext3.MenuLink}'>{itemNext3.MenuName}</a>");
+                                        leftData.Append("</dd></dl>");
+                                    }
+
+                                }
+                                leftData.Append("</dd></dl>");
+
                             }
                         }
                         leftData.Append("</dd></dl>");
@@ -72,9 +82,8 @@ namespace IOA.API.Controllers
                 }
                 leftData.Append("</li>");
             }
-            //把所有拼接放进viewbag 传给视图
-            ViewBag.LeftMenu = leftData.ToString();
-            return View();
+            
+            return  leftData.ToString();
         }
         #endregion
 

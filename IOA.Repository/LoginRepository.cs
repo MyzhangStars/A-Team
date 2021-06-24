@@ -14,7 +14,7 @@ namespace IOA.Repository
         public UserModel LookingFor(string userName, string userPwd)
         {
             string sql = "select * from UserModel where UserName=@userName and UserPwd=@UserPwd";
-            UserModel data = DapperHelper<UserModel>.QueryFirst(sql, new { @userName = userName, userPwd = userPwd });
+            UserModel data = DapperHelper<UserModel>.QuerySingle(sql, new { @userName = userName, userPwd = userPwd });
             return data;
         }
     }

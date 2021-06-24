@@ -1,8 +1,11 @@
 using IOA.Common;
 using IOA.IRepository;
 using IOA.Repository;
+using IOA.Web.LoginFilter;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,8 +30,12 @@ namespace IOA.Web
         {
             services.AddSession();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
+            services.AddSingleton<ILoginRepository, LoginRepository>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             ConfigurationHepler.configurations = Configuration.GetConnectionString("connStr");
+
+            ////µÇÂ¼¹ýÂËÆ÷
+            //services.AddMvc(config => config.Filters.Add(typeof(SignFilter))).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 
         }
@@ -36,6 +43,8 @@ namespace IOA.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -55,7 +64,7 @@ namespace IOA.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

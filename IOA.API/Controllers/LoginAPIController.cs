@@ -25,13 +25,14 @@ namespace IOA.API.Controllers
         }
 
         #region  //生成验证码
-        //public IActionResult VerificationCode()
-        //{
-        //    string code = VerificationCodeHelper.CreateValidateCode(4);
-        //    var file = VerificationCodeHelper.CreateValidateGraphic(code);
-        //    HttpContext.Session.SetString("code", code);
-        //    return File(file, @"/image/jpg");
-        //}
+        [HttpGet]
+        public void VerificationCode()
+        {
+            string code = VerificationCodeHelper.CreateValidateCode(4);
+            var file = VerificationCodeHelper.CreateValidateGraphic(code);
+            HttpContext.Session.SetString("code", code);
+           var a= File(file, @"/image/jpg");
+        }
         #endregion
 
         #region //登录方法

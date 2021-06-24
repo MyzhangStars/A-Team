@@ -1,7 +1,9 @@
 ﻿using IOA.Common;
 using IOA.IRepository;
 using IOA.Model;
+using IOA.Web.LoginFilter;
 using IOA.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,7 +18,6 @@ namespace IOA.Web.Controllers
 {
     public class HomeController : Controller
     {
-
         public readonly IHomeRepositroy _ihomeRepositroy;
         public HomeController(IHomeRepositroy ihomeRepositroy)
         {
@@ -26,59 +27,66 @@ namespace IOA.Web.Controllers
         #region //foreach拼接菜单栏
         public IActionResult Index(int  parentID)
         {
-            //获取全部菜单
-            List<MenuModel> leftNext = _ihomeRepositroy.Show("select * from MenuModel");
-            //获取左侧菜单栏
-            List<MenuModel> left = _ihomeRepositroy.leftData(parentID);
-            StringBuilder leftData = new StringBuilder();
-            foreach (var item in left)
-            {
-                leftData.Append("<li data-name = 'home' class='layui-nav-item layui-nav-itemed'>");
-                leftData.Append($"<a href = 'javascript:;'  lay-direction = '2' >");
-                leftData.Append($"<cite>{item.MenuName}</cite></a>");
-                foreach (var itemNext in leftNext)
-                {
-                    if (itemNext.MenuParentID.Equals(item.MenuId))
-                    {
-                        leftData.Append("<dl class='layui-nav-child'>");
-                        leftData.Append("<dd class='layui-nav-itemed'>");
-                        leftData.Append($"<a href ='javascript:;'>{itemNext.MenuName}</a>");
-                        foreach (var itemNext2 in leftNext)
-                        {
-                            if (itemNext2.MenuParentID.Equals(itemNext.MenuId))
-                            {
-                                leftData.Append("<dl class='layui-nav-child'>");
-                                if (itemNext2.MenuLink == null || itemNext2.MenuLink == "")
-                                {
-                                    itemNext2.MenuLink = "javascript:;";
-                                }
-                                leftData.Append($"<dd><a lay-href='{itemNext2.MenuLink}'>{itemNext2.MenuName}</a>");
-                                foreach (var itemNext3 in leftNext)
-                                {
-                                    if (itemNext3.MenuParentID.Equals(itemNext2.MenuId))
-                                    {
-                                        leftData.Append("<dl class='layui-nav-child'>");
-                                        if (itemNext3.MenuLink == null || itemNext3.MenuLink == "")
-                                        {
-                                            itemNext3.MenuLink = "javascript:;";
-                                        }
-                                        leftData.Append($"<dd><a lay-href='{itemNext3.MenuLink}'>{itemNext3.MenuName}</a>");
-                                        leftData.Append("</dd></dl>");
-                                    }
+            #region MyRegion
+            //int userId= Convert.ToInt32(HttpContext.Session.GetString("userID"));
+            //  ViewBag.userName = HttpContext.Session.GetString("userName");
+            //  //获取全部菜单
+            //  List<MenuModel> leftNext = _ihomeRepositroy.Show("select * from MenuModel");
+            //  //获取左侧菜单栏
+            //  List<MenuModel> left = _ihomeRepositroy.leftData(userId, parentID);
+            //  StringBuilder leftData = new StringBuilder();
+            //  foreach (var item in left)
+            //  {
+            //      leftData.Append("<li data-name = 'home' class='layui-nav-item layui-nav-itemed'>");
+            //      leftData.Append($"<a href = 'javascript:;'  lay-direction = '2' >");
+            //      leftData.Append($"<cite>{item.MenuName}</cite></a>");
+            //      foreach (var itemNext in leftNext)
+            //      {
+            //          if (itemNext.MenuParentID.Equals(item.MenuId))
+            //          {
+            //              leftData.Append("<dl class='layui-nav-child'>");
+            //              leftData.Append("<dd class='layui-nav-itemed'>");
+            //              leftData.Append($"<a href ='javascript:;'>{itemNext.MenuName}</a>");
+            //              foreach (var itemNext2 in leftNext)
+            //              {
+            //                  if (itemNext2.MenuParentID.Equals(itemNext.MenuId))
+            //                  {
+            //                      leftData.Append("<dl class='layui-nav-child'>");
+            //                      if (itemNext2.MenuLink == null || itemNext2.MenuLink == "")
+            //                      {
+            //                          itemNext2.MenuLink = "javascript:;";
+            //                      }
+            //                      leftData.Append($"<dd><a lay-href='{itemNext2.MenuLink}'>{itemNext2.MenuName}</a>");
+            //                      foreach (var itemNext3 in leftNext)
+            //                      {
+            //                          if (itemNext3.MenuParentID.Equals(itemNext2.MenuId))
+            //                          {
+            //                              leftData.Append("<dl class='layui-nav-child'>");
+            //                              if (itemNext3.MenuLink == null || itemNext3.MenuLink == "")
+            //                              {
+            //                                  itemNext3.MenuLink = "javascript:;";
+            //                              }
+            //                              leftData.Append($"<dd><a lay-href='{itemNext3.MenuLink}'>{itemNext3.MenuName}</a>");
+            //                              leftData.Append("</dd></dl>");
+            //                          }
 
-                                }
-                                leftData.Append("</dd></dl>");
+            //                      }
+            //                      leftData.Append("</dd></dl>");
 
-                            }
-                        }
-                        leftData.Append("</dd></dl>");
-                    }
-                }
-                leftData.Append("</li>");
-            }
+            //                  }
+            //              }
+            //              leftData.Append("</dd></dl>");
+            //          }
+            //      }
+            //      leftData.Append("</li>");
+            //  }
 
 
-            ViewBag.LeftMenu = leftData.ToString();
+            //  ViewBag.LeftMenu = leftData.ToString();
+            //  return View();
+            #endregion
+
+            ViewBag.LeftMenu= HttpClientHelper.GetAll(HttpType.HttpGet, "/HomeAPI/Index?parentID=" + parentID);
             return View();
         }
 

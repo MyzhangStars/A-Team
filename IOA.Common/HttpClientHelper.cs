@@ -12,7 +12,7 @@ namespace IOA.Common
 {
     public static class HttpClientHelper
     {
-        private static string apiUri = System.Configuration.ConfigurationManager.AppSettings["apiUri"];
+        private static string apiUri = "http://localhost:28855";
         /// <summary>
         /// 发送Http请求
         /// </summary>

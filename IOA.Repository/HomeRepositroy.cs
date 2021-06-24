@@ -20,7 +20,7 @@ namespace IOA.Repository
             
         //}
 
-        public List<MenuModel> leftData( int parentID=0)
+        public List<MenuModel> leftData(int? userId, int parentID)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("select MenuModel.MenuId,MenuModel.MenuName,UserModel.UserName from RoleMenu join MenuModel on MenuModel.MenuID=RoleMenu.MenuID join UserRole on RoleMenu.RoleID=UserRole.RoleID join UserModel on UserModel.UserID=UserRole.UserID");

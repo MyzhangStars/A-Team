@@ -35,16 +35,16 @@ namespace IOA.API
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
             ConfigurationHepler.configurations = Configuration.GetConnectionString("connStr");
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("any", builder =>
-                 {
-                     builder.AllowAnyOrigin()  //允许任何来源的主机访问
-                     .AllowAnyMethod()
-                     .AllowAnyHeader()
-                     .AllowCredentials(); //指定处理cookie
-                 });
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("any", builder =>
+            //     {
+            //         builder.AllowAnyOrigin()  //允许任何来源的主机访问
+            //         .AllowAnyMethod()
+            //         .AllowAnyHeader()
+            //         .AllowCredentials(); //指定处理cookie
+            //     });
+            //});
 
             services.AddSwaggerGen(c =>
             {
@@ -83,7 +83,7 @@ namespace IOA.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IOA.API v1"));
             }
             //设置全局跨域
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            //app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseHttpsRedirection();
 
             //app.UseSession();
