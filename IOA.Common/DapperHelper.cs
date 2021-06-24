@@ -18,6 +18,9 @@ namespace IOA.Common
         private static readonly string connectionString =
              ConfigurationHepler.configurations;
 
+            
+         
+
         /// <summary>
         /// 查询列表
         /// </summary>

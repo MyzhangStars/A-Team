@@ -8,28 +8,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors;
 
 namespace IOA.API.Controllers
 {
-    public class LoginController : Controller
+    [ApiController]
+    [Route("LoginAPI")]
+    //设置跨域处理的 代理  如果在控制器内的所以都有对应的跨域限制
+    [EnableCors("any")]  //如果在方法头则方法限制
+    public class LoginAPIController : Controller
     {
         public readonly ILoginRepository _iloginRepository;
-        public LoginController(ILoginRepository iloginRepository)
+        public LoginAPIController(ILoginRepository iloginRepository)
         {
             _iloginRepository = iloginRepository;
         }
 
         #region  //生成验证码
-        public IActionResult VerificationCode()
-        {
-            string code = VerificationCodeHelper.CreateValidateCode(4);
-            var file = VerificationCodeHelper.CreateValidateGraphic(code);
-            HttpContext.Session.SetString("code", code);
-            return File(file, @"/image/jpg");
-        }
+        //public IActionResult VerificationCode()
+        //{
+        //    string code = VerificationCodeHelper.CreateValidateCode(4);
+        //    var file = VerificationCodeHelper.CreateValidateGraphic(code);
+        //    HttpContext.Session.SetString("code", code);
+        //    return File(file, @"/image/jpg");
+        //}
         #endregion
 
         #region //登录方法
+        [Route(nameof(Login))]
         public IActionResult Login(string userName = null, string userPwd = null, string code = null)
         {
             int num;
@@ -56,7 +62,7 @@ namespace IOA.API.Controllers
         #endregion
 
         #region //注册
-
+        [Route(nameof(Registered))]
         public IActionResult Registered(string userModel)
         {
             UserModel list = JsonConvert.DeserializeObject<UserModel>(userModel);

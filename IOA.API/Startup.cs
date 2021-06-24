@@ -29,7 +29,7 @@ namespace IOA.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSession();
+            //services.AddSession();
             services.AddControllers();
             services.AddSingleton<ILoginRepository, LoginRepository>();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
@@ -58,7 +58,7 @@ namespace IOA.API
                     BearerFormat = "JWT",
                     Scheme = "Bearer"
                 });
-                        c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOA.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOA.API", Version = "v1" });
                         //添加全局安全条件
                   c.AddSecurityRequirement(new OpenApiSecurityRequirement
                    {
@@ -82,8 +82,11 @@ namespace IOA.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IOA.API v1"));
             }
+            //设置全局跨域
+            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseHttpsRedirection();
 
-            app.UseSession();
+            //app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

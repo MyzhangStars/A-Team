@@ -12,19 +12,22 @@ using System.Threading.Tasks;
 
 namespace IOA.API.Controllers
 {
+    [ApiController]
+    [Route("HomeAPI")]
     //设置跨域处理的 代理  如果在控制器内的所以都有对应的跨域限制
     [EnableCors("any")]  //如果在方法头则方法限制
-    public class HomeController : Controller
+    public class HomeAPIController : Controller
     {
         //实例化
         public readonly IHomeRepositroy _ihomeRepositroy;
-        public HomeController(IHomeRepositroy ihomeRepositroy)
+        public HomeAPIController(IHomeRepositroy ihomeRepositroy)
         {
             _ihomeRepositroy = ihomeRepositroy;
         }
 
 
         #region //点击全部应用 显示左边
+        [Route(nameof(Index))]
         public IActionResult Index(int parentID)
         {
             StringBuilder leftData = new StringBuilder();
