@@ -87,5 +87,13 @@ namespace IOA.API.Controllers
         }
         #endregion
 
+        ////拼接首页
+        //public string HomePage()
+        //{
+
+
+
+        //}
+
     }
 }

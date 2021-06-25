@@ -14,6 +14,7 @@ namespace IOA.Model
         private string  _menulink;//菜单链接地址（可空）
         private int _menustate;//状态（0停用 1启用 默认1）
 
+
         #region //角色ID MenuId
         /// <summary>
         /// //菜单ID

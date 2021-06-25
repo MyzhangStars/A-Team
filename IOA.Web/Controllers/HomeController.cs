@@ -93,6 +93,12 @@ namespace IOA.Web.Controllers
         #endregion
 
 
+        //首页
+        public IActionResult HomePage()
+        {
+            return View();
+        }
+
         #region //递归拼接菜单栏
 
 
