@@ -3,9 +3,11 @@ using IOA.IRepository;
 using IOA.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -29,7 +31,17 @@ namespace IOA.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSession();
+            //services.AddSession(options =>
+            //{
+            //    options.Cookie.Name = ".AdventureWorks.Session";
+            //    options.IdleTimeout = TimeSpan.FromSeconds(120);//设置session的过期时间
+            //    options.Cookie.HttpOnly = true;//设置在浏览器不能通过js获得该cookie的值
+            //});
+            //services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddHttpContextAccessor();
+            ////HttpContextAccessor 默认实现了它简化了访问HttpContext
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddControllers();
             services.AddSingleton<ILoginRepository, LoginRepository>();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();

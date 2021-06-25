@@ -19,7 +19,6 @@ namespace IOA.Web.Controllers
         {
             _iloginRepository = iloginRepository;
         }
-
         //登录视图
         public IActionResult Index()
         {
@@ -40,26 +39,14 @@ namespace IOA.Web.Controllers
         #region //登录方法
         public IActionResult Login(string userName = null, string userPwd = null, string code = null)
         {
-            int num;
+            string num ="";
             if (HttpContext.Session.GetString("code").ToString().ToLower().Equals(code.ToLower()))
             {
-                UserModel list = _iloginRepository.LookingFor(userName, userPwd);
-                if (list != null)
-                {
-                    num = 1;  //登录成功
-                    HttpContext.Session.SetString("userID", list.UserId.ToString());
-                    HttpContext.Session.SetString("userName", list.UserName.ToString());
-                    HttpContext.Session.SetString("userPwd", list.UserPwd.ToString());
-
-                }
-                else
-                {
-                    num = 3; //用户名或密码错误
-                }
+                 num = HttpClientHelper.GetAll(HttpType.HttpGet, $"/LoginAPI/Login?userName={userName}&userPwd={userPwd}");
             }
             else
             {
-                num = 2;  //验证码错误
+                num = "2";  //验证码错误
             }
             return Ok(num);
         }

@@ -20,7 +20,7 @@ namespace IOA.Repository
             
         //}
 
-        public List<MenuModel> leftData(int? userId, int parentID)
+        public List<MenuModel> leftData( int parentID,int? userId=1)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("select MenuModel.MenuId,MenuModel.MenuName,UserModel.UserName from RoleMenu join MenuModel on MenuModel.MenuID=RoleMenu.MenuID join UserRole on RoleMenu.RoleID=UserRole.RoleID join UserModel on UserModel.UserID=UserRole.UserID");
@@ -34,7 +34,7 @@ namespace IOA.Repository
                 stringBuilder.Append(" and MenuModel.MenuName='任务管理'");
             }
 
-            List<MenuModel> leftData = DapperHelper<MenuModel>.Query(stringBuilder.ToString(), new { @parentID = parentID, @userID = 1 });
+            List<MenuModel> leftData = DapperHelper<MenuModel>.Query(stringBuilder.ToString(), new { @parentID = parentID, @userID = userId });
             return leftData;
         }
 

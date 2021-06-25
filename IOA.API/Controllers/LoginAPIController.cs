@@ -15,56 +15,59 @@ namespace IOA.API.Controllers
     [ApiController]
     [Route("LoginAPI")]
     //设置跨域处理的 代理  如果在控制器内的所以都有对应的跨域限制
-    [EnableCors("any")]  //如果在方法头则方法限制
+    //[EnableCors("any")]  //如果在方法头则方法限制
     public class LoginAPIController : Controller
     {
         public readonly ILoginRepository _iloginRepository;
-        public LoginAPIController(ILoginRepository iloginRepository)
+        //public readonly IHttpContextAccessor _ihttpContextAccessor;
+        public LoginAPIController(ILoginRepository iloginRepository/*, IHttpContextAccessor httpContextAccessor*/)
         {
             _iloginRepository = iloginRepository;
+            //_ihttpContextAccessor = httpContextAccessor;
         }
 
-        #region  //生成验证码
-        [HttpGet]
-        public void VerificationCode()
-        {
-            string code = VerificationCodeHelper.CreateValidateCode(4);
-            var file = VerificationCodeHelper.CreateValidateGraphic(code);
-            HttpContext.Session.SetString("code", code);
-           var a= File(file, @"/image/jpg");
-        }
-        #endregion
+        //#region  //生成验证码
+        //[Route(nameof(VerificationCode))]
+        //[HttpGet]
+        //public string VerificationCode()
+        //{
+        //    SessionHelper session = new SessionHelper(_ihttpContextAccessor.HttpContext);
+        //    string code = VerificationCodeHelper.CreateValidateCode(4);
+        //    var file = VerificationCodeHelper.CreateValidateGraphic(code);
+        //    session.SetSession("code", code);
+        //    return file.ToString();
+        //}
+        //#endregion
 
         #region //登录方法
         [Route(nameof(Login))]
-        public IActionResult Login(string userName = null, string userPwd = null, string code = null)
+        [HttpGet]
+        public object Login(string userName = null, string userPwd = null)
         {
+            
             int num;
-            if (HttpContext.Session.GetString("code").ToString().ToLower().Equals(code.ToLower()))
-            {
+            int userid=0;
                 UserModel list = _iloginRepository.LookingFor(userName, userPwd);
                 if (list != null)
                 {
                     num = 1;  //登录成功
-                    HttpContext.Session.SetString("userID", list.UserId.ToString());
+                    userid= list.UserId;
+                    //HttpContext.Session.SetString("userID", list.UserId.ToString());
                 }
                 else
                 {
                     num = 3; //用户名或密码错误
                 }
-            }
-            else
-            {
-                num = 2;  //验证码错误
-            }
-            return Ok(num);
+          
+            return new { num = num,userid=userid};
         }
 
         #endregion
 
         #region //注册
         [Route(nameof(Registered))]
-        public IActionResult Registered(string userModel)
+        [HttpPost]
+        public int Registered(string userModel)
         {
             UserModel list = JsonConvert.DeserializeObject<UserModel>(userModel);
             string sql = "insert into UserModel values('@userName','@userPwd','@userSex','@userCard','@userPhone','@userNational','@userEmail','@userMajor','@userJoinInDate','@userDimissionDate','@userDimissionCause','@userDeleteMark','@userIsAdmin','@userCreateName','@userCreateDate')";
@@ -86,7 +89,7 @@ namespace IOA.API.Controllers
                 @userCreateName = list.UserCreateName,
                 @userCreateDate = list.UserCreateDate
             });
-            return Ok(i);
+            return i;
         }
         #endregion
     }

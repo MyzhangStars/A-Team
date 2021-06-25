@@ -25,7 +25,7 @@ namespace IOA.Web.Controllers
         }
 
         #region //foreach拼接菜单栏
-        public IActionResult Index(int  parentID)
+        public IActionResult Index(int  parentID,int userId=1)
         {
             #region MyRegion
             //int userId= Convert.ToInt32(HttpContext.Session.GetString("userID"));
@@ -86,7 +86,7 @@ namespace IOA.Web.Controllers
             //  return View();
             #endregion
 
-            ViewBag.LeftMenu= HttpClientHelper.GetAll(HttpType.HttpGet, "/HomeAPI/Index?parentID=" + parentID);
+            ViewBag.LeftMenu= HttpClientHelper.GetAll(HttpType.HttpGet, $"/HomeAPI/Index?parentID={parentID}&userId={userId}");
             return View();
         }
 

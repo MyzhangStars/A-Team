@@ -28,14 +28,14 @@ namespace IOA.API.Controllers
         #region //点击全部应用 显示左边
         [Route(nameof(Index))]
         [HttpGet]
-        public string Index(int parentID)
+        public string Index(int parentID,int userId=1)
         {
             //int userId = Convert.ToInt32(HttpContext.Session.GetString("userID"));
             //ViewBag.userName = HttpContext.Session.GetString("userName");
             //获取全部菜单
             List<MenuModel> leftNext = _ihomeRepositroy.Show("select * from MenuModel");
             //获取左侧菜单栏
-            List<MenuModel> left = _ihomeRepositroy.leftData(1,parentID);
+            List<MenuModel> left = _ihomeRepositroy.leftData(parentID,userId);
             StringBuilder leftData = new StringBuilder();
             foreach (var item in left)
             {

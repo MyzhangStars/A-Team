@@ -12,7 +12,7 @@ namespace IOA.IRepository
     {
 
         //获取用户获取左侧菜单
-        List<MenuModel> leftData(int? userId, int parentID = 0);
+        List<MenuModel> leftData(int parentID=0, int? userId=1);
 
     }
 }
