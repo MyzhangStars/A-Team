@@ -15,6 +15,19 @@ namespace IOA.Model
         private string  _rolecreatename; //创建人(默认当前用户)
         private DateTime _rolecreatedate;//创建时间（默认当前时间）
 
+        private string _rolecount; //角色成员个数
+
+        #region //角色成员个数 RoleCount
+        /// <summary>
+        /// //角色成员个数
+        /// </summary>
+        public string  RoleCount
+        {
+            get { return _rolecount; }
+            set { _rolecount = value; }
+        }
+        #endregion
+
         #region //角色ID RoleId
         /// <summary>
         /// //角色ID

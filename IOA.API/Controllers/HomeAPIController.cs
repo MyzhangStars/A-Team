@@ -37,11 +37,13 @@ namespace IOA.API.Controllers
             //获取左侧菜单栏
             List<MenuModel> left = _ihomeRepositroy.leftData(parentID,userId);
             StringBuilder leftData = new StringBuilder();
+            //一级
             foreach (var item in left)
             {
                 leftData.Append("<li data-name = 'home' class='layui-nav-item layui-nav-itemed'>");
                 leftData.Append($"<a href = 'javascript:;'  lay-direction = '2' >");
                 leftData.Append($"<cite>{item.MenuName}</cite></a>");
+                //二级
                 foreach (var itemNext in leftNext)
                 {
                     if (itemNext.MenuParentID.Equals(item.MenuId))
@@ -49,6 +51,7 @@ namespace IOA.API.Controllers
                         leftData.Append("<dl class='layui-nav-child'>");
                         leftData.Append("<dd class='layui-nav-itemed'>");
                         leftData.Append($"<a href ='javascript:;'>{itemNext.MenuName}</a>");
+                        //三级
                         foreach (var itemNext2 in leftNext)
                         {
                             if (itemNext2.MenuParentID.Equals(itemNext.MenuId))
@@ -58,7 +61,8 @@ namespace IOA.API.Controllers
                                 {
                                     itemNext2.MenuLink = "javascript:;";
                                 }
-                                leftData.Append($"<dd><a lay-href='{itemNext2.MenuLink}'>{itemNext2.MenuName}</a>");
+                                leftData.Append($"<dd><a href='{itemNext2.MenuLink}' target='ifr'>{itemNext2.MenuName}</a>");
+                                //四级
                                 foreach (var itemNext3 in leftNext)
                                 {
                                     if (itemNext3.MenuParentID.Equals(itemNext2.MenuId))
@@ -68,7 +72,7 @@ namespace IOA.API.Controllers
                                         {
                                             itemNext3.MenuLink = "javascript:;";
                                         }
-                                        leftData.Append($"<dd><a lay-href='{itemNext3.MenuLink}'>{itemNext3.MenuName}</a>");
+                                        leftData.Append($"<dd><a href='{itemNext3.MenuLink}' target='ifr'>{itemNext3.MenuName}</a>");
                                         leftData.Append("</dd></dl>");
                                     }
 

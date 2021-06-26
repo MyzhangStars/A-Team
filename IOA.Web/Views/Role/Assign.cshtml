@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>菜单</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Scripts/layui-v2.6.8/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="layui-btn-container">
+        <button type="button" class="layui-btn layui-btn-sm" lay-demo="getChecked">获取选中节点数据</button>
+        <button type="button" class="layui-btn layui-btn-sm" lay-demo="setChecked">勾选指定节点</button>
+        <button type="button" class="layui-btn layui-btn-sm" lay-demo="reload">重载实例</button>
+    </div>
+
+    <div id="test12" class="demo-tree-more"></div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/layui-v2.6.8/layui/layui.js"></script>
+
+    <script>
+        layui.use(['tree', 'util'], function () {
+            var tree = layui.tree
+                , layer = layui.layer
+                , util = layui.util
+
+
+            $.ajax({
+                url: "/Role/Joining",
+                type: "get",
+                success: function (data) {
+                    //开启复选框
+                    tree.render({
+                        elem: '#test12'
+                        , data: JSON.parse(data)
+                        , id: 'demoId1'
+                        , showCheckbox: true
+                        , isJump: true //是否允许点击节点时弹出新窗口跳转
+                        , click: function (obj) {
+                            var data = obj.data;  //获取当前点击的节点数据
+                            layer.msg('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
+                        }
+                    });
+                }
+            })
+            //基本演示
+            //tree.render({
+            //    elem: '#test12'
+            //    , data: data
+            //    , showCheckbox: true  //是否显示复选框
+            //    , id: 'demoId1'
+            //    , isJump: true //是否允许点击节点时弹出新窗口跳转
+            //    , click: function (obj) {
+            //        var data = obj.data;  //获取当前点击的节点数据
+            //        layer.msg('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
+            //    }
+            //});
+
+            //按钮事件
+            util.event('lay-demo', {
+                getChecked: function (othis) {
+                    var checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+
+                    layer.alert(JSON.stringify(checkedData), { shade: 0 });
+                    console.log(checkedData);
+                }
+                , setChecked: function () {
+                    tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+                }
+                , reload: function () {
+                    //重载实例
+                    tree.reload('demoId1', {
+
+                    });
+
+                }
+            });
+
+
+        });
+    </script>
+
+
+
+</body>
+</html>

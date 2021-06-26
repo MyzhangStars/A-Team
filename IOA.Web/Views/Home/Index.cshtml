@@ -16,6 +16,7 @@
 <body class="layui-layout-body">
 
     <div id="LAY_app">
+        <input id="userId" type="hidden"  value="@ViewBag.userId"/>
         <div class="layui-layout layui-layout-admin">
             <div class="layui-header">
                 <!-- 头部区域 -->
@@ -137,7 +138,7 @@
             <div class="layadmin-body-shade" layadmin-event="shade"></div>
         </div>
     </div>
-
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/layui-v2.6.8/layui/layui.js"></script>
     <script>
         layui.config({
@@ -159,7 +160,7 @@
 
         function DisPlayMEnu(parentId) {
 
-            location.href = "/Home/Index?parentID=" + parentId;
+            location.href = "/Home/Index?parentID=" + parentId + "&userId=" + $("#userId").val();
         }
     </script>
 </body>

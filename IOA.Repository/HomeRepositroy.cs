@@ -24,8 +24,8 @@ namespace IOA.Repository
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("select MenuModel.MenuId,MenuModel.MenuName,UserModel.UserName from RoleMenu join MenuModel on MenuModel.MenuID=RoleMenu.MenuID join UserRole on RoleMenu.RoleID=UserRole.RoleID join UserModel on UserModel.UserID=UserRole.UserID");
-            stringBuilder.Append(" where MenuModel.MenuParentID=@parentID and UserModel.UserID=@userID");
-            if (parentID==1)
+            stringBuilder.Append(" where MenuModel.MenuParentID=@parentID and UserModel.UserID=@userID  and RoleMenu.RoleMenuState=1");
+            if (parentID == 1)
             {
                 stringBuilder.Append(" and MenuModel.MenuName='个人中心'");
             }
