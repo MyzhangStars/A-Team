@@ -12,13 +12,29 @@ namespace IOA.API.Controllers
     [Route("MenuAPI")]
     public class MenuAPIController : Controller
     {
-        public readonly IMenuRepositroy  _imenuRepositroy;
+        public readonly IMenuRepositroy _imenuRepositroy;
 
         public MenuAPIController(IMenuRepositroy menuRepositroy)
         {
             _imenuRepositroy = menuRepositroy;
         }
+
+
+
+        #region 拼接树
+
+     
+        /// <summary>
+        /// 字典拼接子级传递值报错
+        /// 系统。IOA.API.Controllers.MenuAPIController InvalidOperationException:“行动”。Tree_Next (IOA.API)'有多个参数，
+        /// 这些参数被指定或推断为来自请求体的绑定。每个操作只能绑定一个参数。检查以下参数，并使用'FromQueryAttribute'指定从query绑定，
+        /// 'FromRouteAttribute'指定从route绑定，'FromBodyAttribute'指定从body绑定参数:
+        /// 列表<MenuModel> 数据
+        /// 字典<字符串、对象> json”
+        /// </summary>
+        /// <returns></returns>
         [Route(nameof(Trees))]
+        [HttpGet]
         //拼接树形父级
         public object Trees()
         {
@@ -57,5 +73,8 @@ namespace IOA.API.Controllers
         //    }
         //    json.Add("children", treeJson);
         //}
+        #endregion
+
+
     }
 }

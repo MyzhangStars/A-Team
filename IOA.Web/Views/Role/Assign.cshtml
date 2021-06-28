@@ -17,9 +17,9 @@
 <body>
 
     <div class="layui-btn-container">
-        <button type="button" class="layui-btn layui-btn-sm" lay-demo="getChecked">获取选中节点数据</button>
-        <button type="button" class="layui-btn layui-btn-sm" lay-demo="setChecked">勾选指定节点</button>
-        <button type="button" class="layui-btn layui-btn-sm" lay-demo="reload">重载实例</button>
+        <button type="button" class="layui-btn  layui-btn-lg" lay-demo="getChecked">保存</button>
+        <button type="button" class="layui-btn  layui-btn-lg" lay-demo="setChecked">成为管理员</button>
+        <button type="button" class="layui-btn  layui-btn-lg" lay-demo="reload">重置</button>
     </div>
 
     <div id="test12" class="demo-tree-more"></div>
@@ -37,10 +37,11 @@
                 url: "/Role/Joining",
                 type: "get",
                 success: function (data) {
+                    debugger;
                     //开启复选框
                     tree.render({
                         elem: '#test12'
-                        , data: JSON.parse(data)
+                        , data: data
                         , id: 'demoId1'
                         , showCheckbox: true
                         , isJump: true //是否允许点击节点时弹出新窗口跳转
@@ -51,18 +52,7 @@
                     });
                 }
             })
-            //基本演示
-            //tree.render({
-            //    elem: '#test12'
-            //    , data: data
-            //    , showCheckbox: true  //是否显示复选框
-            //    , id: 'demoId1'
-            //    , isJump: true //是否允许点击节点时弹出新窗口跳转
-            //    , click: function (obj) {
-            //        var data = obj.data;  //获取当前点击的节点数据
-            //        layer.msg('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
-            //    }
-            //});
+          
 
             //按钮事件
             util.event('lay-demo', {
@@ -73,7 +63,7 @@
                     console.log(checkedData);
                 }
                 , setChecked: function () {
-                    tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+                    tree.setChecked('demoId1', [1,2,3,4,5]); //勾选指定节点
                 }
                 , reload: function () {
                     //重载实例
