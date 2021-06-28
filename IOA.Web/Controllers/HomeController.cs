@@ -19,14 +19,24 @@ namespace IOA.Web.Controllers
     public class HomeController : Controller
     {
         public readonly IHomeRepositroy _ihomeRepositroy;
-        public HomeController(IHomeRepositroy ihomeRepositroy)
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger, IHomeRepositroy ihomeRepositroy)
         {
             _ihomeRepositroy = ihomeRepositroy;
+            _logger = logger;
         }
-
+        public IActionResult LoggerTest()
+        {
+            _logger.LogInformation("你访问了首页");
+            _logger.LogWarning("警告信息");
+            _logger.LogError("错误信息");
+            return Content("success");
+        }
         #region //foreach拼接菜单栏
         public IActionResult Index(int  parentID,int userId)
         {
+           
             #region MyRegion
             //int userId= Convert.ToInt32(HttpContext.Session.GetString("userID"));
             //  ViewBag.userName = HttpContext.Session.GetString("userName");

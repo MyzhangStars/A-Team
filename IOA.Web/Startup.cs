@@ -37,6 +37,12 @@ namespace IOA.Web
             ////登录过滤器
             //services.AddMvc(config => config.Filters.Add(typeof(SignFilter))).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            //只有在没有其他选择的情况下，才建议使用工厂方法。 例如，假设某个服务需要由 DI 提供的 ILogger<T> 实例
+            //services.AddSingleton<IMyService>((container) =>
+            //{
+            //    var logger = container.GetRequiredService<ILogger<MyService>>();
+            //    return new MyService() { Logger = logger };
+            //});
 
         }
 

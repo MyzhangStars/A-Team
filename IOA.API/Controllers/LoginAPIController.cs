@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.Extensions.Logging;
 
 namespace IOA.API.Controllers
 {
@@ -18,11 +19,13 @@ namespace IOA.API.Controllers
     //[EnableCors("any")]  //如果在方法头则方法限制
     public class LoginAPIController : Controller
     {
+        private readonly ILogger<LoginAPIController> _logger;
         public readonly ILoginRepository _iloginRepository;
         //public readonly IHttpContextAccessor _ihttpContextAccessor;
-        public LoginAPIController(ILoginRepository iloginRepository/*, IHttpContextAccessor httpContextAccessor*/)
+        public LoginAPIController(ILogger<LoginAPIController> logger, ILoginRepository iloginRepository/*, IHttpContextAccessor httpContextAccessor*/)
         {
             _iloginRepository = iloginRepository;
+            _logger = logger;
             //_ihttpContextAccessor = httpContextAccessor;
         }
 
@@ -38,6 +41,14 @@ namespace IOA.API.Controllers
         //    return file.ToString();
         //}
         //#endregion
+
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    _logger.LogTrace("Trace");
+        //    _logger.LogError("Error");
+        //    return new string[] { "value1", "value2" };
+        //}
 
         #region //登录方法
         [Route(nameof(Login))]
