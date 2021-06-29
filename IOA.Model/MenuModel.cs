@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IOA.Model
+﻿namespace IOA.Model
 {
-  public   class MenuModel
+    public class MenuModel
     {
         private int _menuid;////菜单ID
-        private string  _menuname;//菜单名称(非空)
+        private string _menuname;//菜单名称(非空)
         private int _menuparentid;//上级菜单ID（非空）
-        private string  _menulink;//菜单链接地址（可空）
+        private string _menulink;//菜单链接地址（可空）
         private int _menustate;//状态（0停用 1启用 默认1）
 
 
@@ -30,7 +24,7 @@ namespace IOA.Model
         /// <summary>
         /// //菜单名称(非空)
         /// </summary>
-        public string  MenuName
+        public string MenuName
         {
             get { return _menuname; }
             set { _menuname = value; }

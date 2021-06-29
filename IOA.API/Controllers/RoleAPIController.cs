@@ -1,10 +1,7 @@
 ﻿using IOA.IRepository;
 using IOA.Model;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IOA.API.Controllers
 {
@@ -20,11 +17,11 @@ namespace IOA.API.Controllers
         }
         [Route(nameof(Index))]
         [HttpGet]
-        public List<RoleModel>  Index()
+        public List<RoleModel> Index()
         {
             List<RoleModel> data = _iroleRepositroy.Show("select RoleModel.RoleId,RoleModel.RoleName,COUNT(*) as RoleCount,RoleModel.RoleMsg from UserRole join UserModel on UserModel.UserId=UserRole.UserId join RoleModel on RoleModel.RoleId=UserRole.RoleId group by RoleModel.RoleId,RoleModel.RoleName,RoleModel.RoleMsg");
             return data;
         }
-       
+
     }
 }

@@ -1,12 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using NLog.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IOA.API
 {
@@ -22,8 +15,8 @@ namespace IOA.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-            //配置使用Nlog
-            .UseNLog();
+                });
+        ////配置使用Nlog
+        //.UseNLog()
     }
 }

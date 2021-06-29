@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IOA.Model
 {
-   public  class RoleModel
+    public class RoleModel
     {
         private int _roleid;////角色ID
-        private string  _rolename; //角色名称（非空）
-        private string  _rolemsg; ////角色描述（可空）
+        private string _rolename; //角色名称（非空）
+        private string _rolemsg; ////角色描述（可空）
         private int _rolestate; //-角色状态（0停用 1启用 默认1）
-        private string  _rolecreatename; //创建人(默认当前用户)
+        private string _rolecreatename; //创建人(默认当前用户)
         private DateTime _rolecreatedate;//创建时间（默认当前时间）
 
         private string _rolecount; //角色成员个数
@@ -21,7 +17,7 @@ namespace IOA.Model
         /// <summary>
         /// //角色成员个数
         /// </summary>
-        public string  RoleCount
+        public string RoleCount
         {
             get { return _rolecount; }
             set { _rolecount = value; }
@@ -43,7 +39,7 @@ namespace IOA.Model
         /// <summary>
         /// 角色名称（非空）
         /// </summary>
-        public string  RoleName
+        public string RoleName
         {
             get { return _rolename; }
             set { _rolename = value; }
@@ -54,7 +50,7 @@ namespace IOA.Model
         /// <summary>
         /// //角色描述（可空）
         /// </summary>
-        public string  RoleMsg
+        public string RoleMsg
         {
             get { return _rolemsg; }
             set { _rolemsg = value; }
@@ -76,7 +72,7 @@ namespace IOA.Model
         /// <summary>
         /// 创建人(默认当前用户)
         /// </summary>
-        public string  RoleCreateName
+        public string RoleCreateName
         {
             get { return _rolecreatename; }
             set { _rolecreatename = value; }
@@ -93,6 +89,6 @@ namespace IOA.Model
             set { _rolecreatedate = value; }
         }
         #endregion
-      
+
     }
 }

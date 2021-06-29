@@ -1,13 +1,9 @@
 ﻿using IOA.Common;
 using IOA.IRepository;
 using IOA.Model;
-using IRepositroy;
 using Repositroy;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IOA.Repository
 {
@@ -17,10 +13,10 @@ namespace IOA.Repository
         //public List<MenuModel> headData(string sql, object param)
         //{
         //    //string sql = "select MenuModel.MenuName,UserModel.UserName from RoleMenu join MenuModel on MenuModel.MenuID=RoleMenu.MenuID join UserRole on RoleMenu.RoleID=UserRole.RoleID join UserModel on UserModel.UserID=UserRole.UserID where MenuModel.MenuParentID=0  and UserModel.UserID=1";
-            
+
         //}
 
-        public List<MenuModel> leftData( int parentID,int? userId=1)
+        public List<MenuModel> leftData(int parentID, int? userId = 1)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("select MenuModel.MenuId,MenuModel.MenuName,UserModel.UserName from RoleMenu join MenuModel on MenuModel.MenuID=RoleMenu.MenuID join UserRole on RoleMenu.RoleID=UserRole.RoleID join UserModel on UserModel.UserID=UserRole.UserID");

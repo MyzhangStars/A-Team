@@ -1,14 +1,7 @@
 ﻿using IOA.Common;
 using IOA.IRepository;
-using IOA.Model;
-using IOA.Web.LoginFilter;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace IOA.Web.Controllers
 {
@@ -39,10 +32,10 @@ namespace IOA.Web.Controllers
         #region //登录方法
         public IActionResult Login(string userName = null, string userPwd = null, string code = null)
         {
-            string num ="";
+            string num = "";
             if (HttpContext.Session.GetString("code").ToString().ToLower().Equals(code.ToLower()))
             {
-                 num = HttpClientHelper.GetAll(HttpType.HttpGet, $"/LoginAPI/Login?userName={userName}&userPwd={userPwd}");
+                num = HttpClientHelper.GetAll(HttpType.HttpGet, $"/LoginAPI/Login?userName={userName}&userPwd={userPwd}");
             }
             else
             {

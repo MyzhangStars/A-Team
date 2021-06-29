@@ -1,5 +1,3 @@
-using System;
-
 namespace IOA.Web.Models
 {
     public class ErrorViewModel

@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IOA.Common
 {
 
     public class SessionHelper
-    { 
-    
+    {
+
         private IHttpContextAccessor _accessor;
 
         private ISession _session;

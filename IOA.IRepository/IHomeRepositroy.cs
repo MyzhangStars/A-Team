@@ -1,10 +1,6 @@
 ﻿using IOA.Model;
 using IRepositroy;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IOA.IRepository
 {
@@ -12,7 +8,7 @@ namespace IOA.IRepository
     {
 
         //获取用户获取左侧菜单
-        List<MenuModel> leftData(int parentID=0, int? userId=1);
+        List<MenuModel> leftData(int parentID = 0, int? userId = 1);
 
     }
 }

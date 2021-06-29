@@ -1,14 +1,9 @@
 ﻿using IOA.Model;
 using IRepositroy;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IOA.IRepository
 {
-   public  interface IRoleRepositroy:IBaseRepositroy<RoleModel>
+    public interface IRoleRepositroy : IBaseRepositroy<RoleModel>
     {
     }
 }

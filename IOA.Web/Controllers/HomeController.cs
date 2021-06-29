@@ -1,42 +1,33 @@
 ﻿using IOA.Common;
 using IOA.IRepository;
 using IOA.Model;
-using IOA.Web.LoginFilter;
-using IOA.Web.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IOA.Web.Controllers
 {
     public class HomeController : Controller
     {
         public readonly IHomeRepositroy _ihomeRepositroy;
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IHomeRepositroy ihomeRepositroy)
+        public HomeController(/*ILogger<HomeController> logger,*/ IHomeRepositroy ihomeRepositroy)
         {
             _ihomeRepositroy = ihomeRepositroy;
-            _logger = logger;
+            //_logger = logger;
         }
-        public IActionResult LoggerTest()
-        {
-            _logger.LogInformation("你访问了首页");
-            _logger.LogWarning("警告信息");
-            _logger.LogError("错误信息");
-            return Content("success");
-        }
+        //public IActionResult LoggerTest()
+        //{
+        //    _logger.LogInformation("你访问了首页");
+        //    _logger.LogWarning("警告信息");
+        //    _logger.LogError("错误信息");
+        //    return Content("success");
+        //}
         #region //foreach拼接菜单栏
-        public IActionResult Index(int  parentID,int userId)
+        public IActionResult Index(int parentID, int userId)
         {
-           
+
             #region MyRegion
             //int userId= Convert.ToInt32(HttpContext.Session.GetString("userID"));
             //  ViewBag.userName = HttpContext.Session.GetString("userName");
@@ -96,7 +87,7 @@ namespace IOA.Web.Controllers
             //  return View();
             #endregion
             ViewBag.userId = userId;
-            ViewBag.LeftMenu= HttpClientHelper.GetAll(HttpType.HttpGet,$"/HomeAPI/Index?parentID={parentID}&userId={userId}");
+            ViewBag.LeftMenu = HttpClientHelper.GetAll(HttpType.HttpGet, $"/HomeAPI/Index?parentID={parentID}&userId={userId}");
             return View();
         }
 

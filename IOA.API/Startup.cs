@@ -3,19 +3,10 @@ using IOA.IRepository;
 using IOA.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using NLog.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IOA.API
 {
@@ -76,8 +67,8 @@ namespace IOA.API
                     Scheme = "Bearer"
                 });
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IOA.API", Version = "v1" });
-                        //添加全局安全条件
-                  c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                //添加全局安全条件
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
                    {
                      {
                        new OpenApiSecurityScheme{

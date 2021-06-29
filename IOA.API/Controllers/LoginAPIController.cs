@@ -1,15 +1,8 @@
-﻿using IOA.Common;
-using IOA.IRepository;
+﻿using IOA.IRepository;
 using IOA.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace IOA.API.Controllers
 {
@@ -55,22 +48,22 @@ namespace IOA.API.Controllers
         [HttpGet]
         public object Login(string userName = null, string userPwd = null)
         {
-            
+
             int num;
-            int userid=0;
-                UserModel list = _iloginRepository.LookingFor(userName, userPwd);
-                if (list != null)
-                {
-                    num = 1;  //登录成功
-                    userid= list.UserId;
-                    //HttpContext.Session.SetString("userID", list.UserId.ToString());
-                }
-                else
-                {
-                    num = 3; //用户名或密码错误
-                }
-          
-            return new { num = num,userid=userid};
+            int userid = 0;
+            UserModel list = _iloginRepository.LookingFor(userName, userPwd);
+            if (list != null)
+            {
+                num = 1;  //登录成功
+                userid = list.UserId;
+                //HttpContext.Session.SetString("userID", list.UserId.ToString());
+            }
+            else
+            {
+                num = 3; //用户名或密码错误
+            }
+
+            return new { num = num, userid = userid };
         }
 
         #endregion

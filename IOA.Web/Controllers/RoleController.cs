@@ -1,11 +1,9 @@
 ﻿using IOA.Common;
 using IOA.Model;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace IOA.Web.Controllers
 {
