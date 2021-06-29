@@ -4,6 +4,8 @@ using IOA.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +22,32 @@ namespace IOA.API.Controllers
     {
         //实例化
         public readonly IHomeRepositroy _ihomeRepositroy;
-        public HomeAPIController(IHomeRepositroy ihomeRepositroy)
+        private readonly Logger _logger;
+        private readonly ILogger<IHomeRepositroy> _Logger;
+        public HomeAPIController(IHomeRepositroy ihomeRepositroy, Logger logger, ILogger<IHomeRepositroy> Logger)
         {
             _ihomeRepositroy = ihomeRepositroy;
+            _logger = logger;
+            _Logger = Logger;
         }
+        [Route(nameof(Get))]
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            _logger.Info("普通信息日志------");
+            _logger.Debug("调试日志--------");
+            _logger.Error("错误日志---------");
+            _logger.Fatal("异常日志---------");
+            _logger.Warn("警告日志---------");
+            _logger.Trace("跟踪日志--------");
+            _logger.Log(NLog.LogLevel.Warn, "Log日志---------");
 
+            _Logger.LogInformation("你访问了首页");
+            _Logger.LogWarning("警告信息");
+            _Logger.LogError("错误信息");
+            return new string[] { "value1", "value2" };
+             
+        }
         #region //点击全部应用 显示左边
         [Route(nameof(Index))]
         [HttpGet]

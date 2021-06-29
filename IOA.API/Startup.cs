@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +30,10 @@ namespace IOA.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services/*, ILoggerFactory loggerFactory*/)
         {
+            //loggerFactory.AddNLog();
+
             //services.AddSession(options =>
             //{
             //    options.Cookie.Name = ".AdventureWorks.Session";
