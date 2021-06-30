@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using NLog.Web;
 
 namespace IOA.API
 {
@@ -15,8 +16,8 @@ namespace IOA.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
-        ////配置使用Nlog
-        //.UseNLog()
+                })
+        //配置使用Nlog
+        .UseNLog();
     }
 }
