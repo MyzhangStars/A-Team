@@ -23,6 +23,15 @@ namespace IOA.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services/*, ILoggerFactory loggerFactory*/)
         {
+            //redis缓存
+            var section = Configuration.GetSection("Redis:Default");
+            //连接字符串
+            ConfigHelperRedis._connectionString = section.GetSection("connStr").Value;
+            //实例化名称
+            ConfigHelperRedis._instanceName = section.GetSection("InstanceName").Value;
+            //默认数据库
+            ConfigHelperRedis._db = int.Parse(section.GetSection("DefaultDB").Value ?? "0");
+
             //loggerFactory.AddNLog();
 
             //services.AddSession(options =>

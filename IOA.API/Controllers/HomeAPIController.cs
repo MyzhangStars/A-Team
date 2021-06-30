@@ -1,10 +1,13 @@
-﻿using IOA.IRepository;
+﻿using IOA.Common;
+using IOA.IRepository;
 using IOA.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NLog;
+using StackExchange.Redis;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace IOA.API.Controllers
 {
@@ -14,6 +17,7 @@ namespace IOA.API.Controllers
     /*[EnableCors("any")]*/  //如果在方法头则方法限制
     public class HomeAPIController : Controller
     {
+        RedisHelper redisHelper = new RedisHelper();
         //实例化
         public readonly IHomeRepositroy _ihomeRepositroy;
         //private readonly Logger _logger;
@@ -24,33 +28,84 @@ namespace IOA.API.Controllers
             //_logger = logger;
             _Logger = Logger;
         }
-        [Route(nameof(Get))]
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        [HttpPost]
+          public void AddRedis(RedisType redisType,string key,string value)
         {
-            //_logger.Info("普通信息日志------");
-            //_logger.Debug("调试日志--------");
-            //_logger.Error("错误日志---------");
-            //_logger.Fatal("异常日志---------");
-            //_logger.Warn("警告日志---------");
-            //_logger.Trace("跟踪日志--------");
-            //_logger.Log(NLog.LogLevel.Warn, "Log日志---------");
-
-            _Logger.LogInformation("你访问了首页");
-            _Logger.LogWarning("警告信息");
-            _Logger.LogError("错误信息");
-            return new string[] { "value1", "value2" };
-
+            //获取枚举类型对应的值
+            string redisKey = redisType.ToString();
+            //拼接Redis的Key名
+            redisKey += ("_" + key);
+            //写入Redis缓存
+            redisHelper.CacheRedis.StringSet(redisKey, value);
         }
+
+        //[Route(nameof(Get))]
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    //_logger.Info("普通信息日志------");
+        //    //_logger.Debug("调试日志--------");
+        //    //_logger.Error("错误日志---------");
+        //    //_logger.Fatal("异常日志---------");
+        //    //_logger.Warn("警告日志---------");
+        //    //_logger.Trace("跟踪日志--------");
+        //    //_logger.Log(NLog.LogLevel.Warn, "Log日志---------");
+
+        //    _Logger.LogInformation("你访问了首页");
+        //    _Logger.LogWarning("警告信息");
+        //    _Logger.LogError("错误信息");
+        //    return new string[] { "value1", "value2" };
+
+        //}
+
         #region //点击全部应用 显示左边
         [Route(nameof(Index))]
         [HttpGet]
         public string Index(int parentID, int userId = 1)
         {
-            //int userId = Convert.ToInt32(HttpContext.Session.GetString("userID"));
-            //ViewBag.userName = HttpContext.Session.GetString("userName");
-            //获取全部菜单
-            List<MenuModel> leftNext = _ihomeRepositroy.Show("select * from MenuModel");
+
+        //    //添加Redis缓存
+        //    AddRedis(redisType, student.Id.ToString(), JsonConvert.SerializeObject(student));
+
+        //    //获取枚举类型对应的值
+        //    string redisKey = Enum.GetName(typeof(EnumType.RedisType), redisType);
+        //    //拼接Redis的Key名
+        //    redisKey += ("_" + student.Id);
+        //    //根据RedisKey读取Redis缓存数据
+        //    var studentRedis = redisHelper.CacheRedis.StringGet(redisKey);
+
+        //    //删除缓存
+        //    redisHelper.CacheRedis.KeyDelete("key");
+
+        //    //过期时间 以秒为单位 
+        //    redisHelper.CacheRedis.KeyExpire("key", System.DateTime.Now.AddSeconds(20));  //20秒
+
+
+        //    //判断是否从Redis中取到数据
+        //    if (studentRedis == "")
+        //    {
+        //        //Redis没有，在数据库中查找
+        //    }
+        //    try
+        //    {
+        //        //转换为集合
+        //        List<Student> listStudent = JsonConvert.DeserializeObject<List<Student>>(studentRedis);
+
+        //        return JsonConvert.SerializeObject(listStudent);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        //转换为对象
+        //        Student singleStudent = JsonConvert.DeserializeObject<Student>(studentRedis);
+        //        return JsonConvert.SerializeObject(singleStudent);
+        //    }
+        //}
+        //int userId = Convert.ToInt32(HttpContext.Session.GetString("userID"));
+        //ViewBag.userName = HttpContext.Session.GetString("userName");
+
+        //获取全部菜单
+        List<MenuModel> leftNext = _ihomeRepositroy.Show("select * from MenuModel");
             //获取左侧菜单栏
             List<MenuModel> left = _ihomeRepositroy.leftData(parentID, userId);
             StringBuilder leftData = new StringBuilder();

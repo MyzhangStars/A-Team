@@ -57,6 +57,7 @@ namespace IOA.API.Controllers
                 num = 1;  //登录成功
                 userid = list.UserId;
                 //HttpContext.Session.SetString("userID", list.UserId.ToString());
+
             }
             else
             {
