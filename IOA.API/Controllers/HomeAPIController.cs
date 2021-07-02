@@ -8,6 +8,7 @@ using StackExchange.Redis;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using System;
 
 namespace IOA.API.Controllers
 {
@@ -28,17 +29,58 @@ namespace IOA.API.Controllers
             //_logger = logger;
             _Logger = Logger;
         }
+        //添加Redis缓存
 
-        [HttpPost]
-          public void AddRedis(RedisType redisType,string key,string value)
-        {
-            //获取枚举类型对应的值
-            string redisKey = redisType.ToString();
-            //拼接Redis的Key名
-            redisKey += ("_" + key);
-            //写入Redis缓存
-            redisHelper.CacheRedis.StringSet(redisKey, value);
-        }
+        //[HttpPost]
+        //  public void AddRedis(RedisType redisType,string key,string value)
+        //{
+        //    //获取枚举类型对应的值
+        //    string redisKey = redisType.ToString();
+        //    //拼接Redis的Key名
+        //    redisKey += ("_" + key);
+        //    //写入Redis缓存
+        //    redisHelper.CacheRedis.StringSet(redisKey, value);
+        //}
+
+        //public object Get(RedisType redisType,string key,string value)
+        //{
+        //    //value 转换成 JsonConvert.SerializeObject字符串
+        //    AddRedis(redisType, key, value);
+
+        ////获取枚举类型对应的值
+        //string redisKey = Enum.GetName(typeof(RedisType), redisType);
+        ////拼接Redis的Key名
+        //redisKey += ("_" + key);
+        //    //根据RedisKey读取Redis缓存数据
+        //    var studentRedis = redisHelper.CacheRedis.StringGet(redisKey);
+
+        ////删除缓存
+        //redisHelper.CacheRedis.KeyDelete("key");
+
+        //    //过期时间 以秒为单位 
+        //    redisHelper.CacheRedis.KeyExpire("key", System.DateTime.Now.AddSeconds(20));  //20秒
+
+
+        //    //判断是否从Redis中取到数据
+        //    if (studentRedis == "")
+        //    {
+        //        //Redis没有，在数据库中查找
+        //    }
+        //    try
+        //    {
+        //        //转换为集合
+        //        List<T> listStudent = JsonConvert.DeserializeObject<List<T>>(studentRedis);
+
+        //        return JsonConvert.SerializeObject(listStudent);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        //转换为对象
+        //        T singleStudent = JsonConvert.DeserializeObject<T>(studentRedis);
+        //        return JsonConvert.SerializeObject(singleStudent);
+        //    }
+        //}
+
 
         //[Route(nameof(Get))]
         //[HttpGet]
@@ -65,42 +107,7 @@ namespace IOA.API.Controllers
         public string Index(int parentID, int userId = 1)
         {
 
-        //    //添加Redis缓存
-        //    AddRedis(redisType, student.Id.ToString(), JsonConvert.SerializeObject(student));
-
-        //    //获取枚举类型对应的值
-        //    string redisKey = Enum.GetName(typeof(EnumType.RedisType), redisType);
-        //    //拼接Redis的Key名
-        //    redisKey += ("_" + student.Id);
-        //    //根据RedisKey读取Redis缓存数据
-        //    var studentRedis = redisHelper.CacheRedis.StringGet(redisKey);
-
-        //    //删除缓存
-        //    redisHelper.CacheRedis.KeyDelete("key");
-
-        //    //过期时间 以秒为单位 
-        //    redisHelper.CacheRedis.KeyExpire("key", System.DateTime.Now.AddSeconds(20));  //20秒
-
-
-        //    //判断是否从Redis中取到数据
-        //    if (studentRedis == "")
-        //    {
-        //        //Redis没有，在数据库中查找
-        //    }
-        //    try
-        //    {
-        //        //转换为集合
-        //        List<Student> listStudent = JsonConvert.DeserializeObject<List<Student>>(studentRedis);
-
-        //        return JsonConvert.SerializeObject(listStudent);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        //转换为对象
-        //        Student singleStudent = JsonConvert.DeserializeObject<Student>(studentRedis);
-        //        return JsonConvert.SerializeObject(singleStudent);
-        //    }
-        //}
+      
         //int userId = Convert.ToInt32(HttpContext.Session.GetString("userID"));
         //ViewBag.userName = HttpContext.Session.GetString("userName");
 
@@ -160,6 +167,7 @@ namespace IOA.API.Controllers
             }
 
             return leftData.ToString();
+
         }
         #endregion
 

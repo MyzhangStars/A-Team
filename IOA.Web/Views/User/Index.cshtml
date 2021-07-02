@@ -1,0 +1,125 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="~/Scripts/layui-v2.6.8/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/layui-v2.6.8/layui/layui.js"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        </div>
+    </script>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+
+
+    <script>
+layui.use('table', function(){
+  var table = layui.table;
+
+  table.render({
+    elem: '#test'
+    , url:'/User/Show'
+    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+    ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+      title: '提示'
+      ,layEvent: 'LAYTABLE_TIPS'
+      ,icon: 'layui-icon-tips'
+    }]
+    ,title: '用户数据表'
+    ,cols: [[
+      {type: 'checkbox', fixed: 'left'}
+        , { field: 'userId', title:'用户工号', width:80, fixed: 'left', unresize: true, sort: true}
+        , { field: 'userName', title: '用户真实姓名', width: 120, edit: 'text' }
+        , { field: 'userPwd', title: '用户登录密码', width: 120, edit: 'text' }
+        , { field: 'userSex', title: '用户性别', width: 120, edit: 'text' }
+        , { field: 'userCard', title: '用户身份证', width: 120, edit: 'text' }
+        , { field: 'userPhone', title: '用户手机号', width: 120, edit: 'text' }
+        , { field: 'userNational', title: '用户民族', width: 120, edit: 'text' }
+        , { field: 'userEmail', title: '用户邮箱', width: 120, edit: 'text' }
+        , { field: 'userMajor', title: '用户专业', width: 120, edit: 'text' }
+        , { field: 'userJoinInDate', title: '用户入职日期', width: 120 }
+        , { field: 'userDimissionDate', title: '用户离职日期', width: 120 }
+        , { field: 'userDimissionCause', title: '用户离职原因', width: 120, edit: 'text' }
+        , { field: 'userDeleteMark', title: '删除标记', width: 120, edit: 'text' }
+        , { field: 'userIsAdmin', title: '是否系统管理员', width: 120, edit: 'text' }
+        , { field: 'userCreateName', title: '添加人', width: 120, edit: 'text' }
+        , { field: 'UserCreateDate', title: '添加日期', width: 120 }
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+    ]]
+    ,page: true
+  });
+
+  //头工具栏事件
+  table.on('toolbar(test)', function(obj){
+    var checkStatus = table.checkStatus(obj.config.id);
+    switch(obj.event){
+      case 'getCheckData':
+        var data = checkStatus.data;
+        layer.alert(JSON.stringify(data));
+      break;
+      case 'getCheckLength':
+        var data = checkStatus.data;
+        layer.msg('选中了：'+ data.length + ' 个');
+      break;
+      case 'isAll':
+        layer.msg(checkStatus.isAll ? '全选': '未全选');
+      break;
+
+      //自定义头工具栏右侧图标 - 提示
+      case 'LAYTABLE_TIPS':
+        layer.alert('这是工具栏右侧自定义的一个图标按钮');
+      break;
+    };
+  });
+
+  //监听行工具事件
+  table.on('tool(test)', function(obj){
+      var data = obj.data //获得当前行数据
+      ,layEvent = obj.event; //获得 lay-event 对应的值
+      var id = data.userId
+    //console.log(obj)
+    if(obj.event === 'del'){
+        layer.confirm('真的删除行么', function (index) {
+            $.ajax({
+                url: '/User/Del?id=' + id,
+                type: 'get',
+                success: function (d) {
+                    layer.msg("删除成功", function () {
+                        Hob.reload();
+                    });
+                }
+            })
+      });
+    } else if(obj.event === 'edit'){
+        location.href = '/User/UserFill?ids=' + id;
+    }
+  });
+});
+    </script>
+
+</body>
+</html>

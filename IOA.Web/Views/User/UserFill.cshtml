@@ -1,0 +1,254 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <link href="~/Scripts/layui-v2.6.8/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Scripts/layui-v2.6.8/layui/layui.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+
+
+    <form class="layui-form" action="">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户真实姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserName" id="UserName" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户登录密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserPwd" id="UserPwd" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户性别</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserSex" id="UserSex" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户身份证</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserCard" id="UserCard" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户手机号</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserPhone" id="UserPhone" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户民族</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserNational" id="UserNational" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户邮箱</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserEmail" id="UserEmail" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户专业</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserMajor" id="UserMajor" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户入职日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserJoinInDate" id="UserJoinInDate" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户离职日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserDimissionDate" id="UserDimissionDate" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户离职原因</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserDimissionCause" id="UserDimissionCause" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">删除标记</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserDeleteMark" id="UserDeleteMark" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否系统管理员</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserIsAdmin" id="UserIsAdmin" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">添加人</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserCreateName" id="UserCreateName" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">添加日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="UserCreateDate" id="UserCreateDate" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+      var form = layui.form
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+      //日期
+      laydate.render({
+        elem: '#date'
+      });
+      laydate.render({
+        elem: '#date1'
+      });
+
+      //创建一个编辑器
+      var editIndex = layedit.build('LAY_demo_editor');
+
+      //自定义验证规则
+      form.verify({
+        title: function(value){
+          if(value.length < 5){
+            return '标题至少得5个字符啊';
+          }
+        }
+        ,pass: [
+          /^[\S]{6,12}$/
+          ,'密码必须6到12位，且不能出现空格'
+        ]
+        ,content: function(value){
+          layedit.sync(editIndex);
+        }
+      });
+
+      //监听指定开关
+      form.on('switch(switchTest)', function(data){
+        layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+          offset: '6px'
+        });
+        layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+      });
+
+      //监听提交
+      form.on('submit(demo1)', function(data){
+          $.ajax({
+              url: '/User/Upd',
+              type: 'post',
+              data: data.field,
+              success: function (d) {
+                  console.log(d);
+                  if (d > 0) {
+                      layer.msg("修改成功", function () {
+                          parent.location.href = '/User/Index';
+                      });
+                  }
+                  else {
+                      layer.msg("修改失败");
+                  }
+              }
+          });
+        return false;
+      });
+
+      //表单赋值
+      layui.$('#LAY-component-form-setval').on('click', function(){
+        form.val('example', {
+          "username": "贤心" // "name": "value"
+          ,"password": "123456"
+          ,"interest": 1
+          ,"like[write]": true //复选框选中状态
+          ,"close": true //开关状态
+          ,"sex": "女"
+          ,"desc": "我爱 layui"
+        });
+      });
+
+      //表单取值
+      layui.$('#LAY-component-form-getval').on('click', function(){
+        var data = form.val('example');
+        alert(JSON.stringify(data));
+      });
+
+
+        $(function () {
+            $.ajax({
+                url: '/User/Assignment?id=' +@ViewBag.xiala,
+                type: 'get',
+                success: function (d) {
+                    $("#UserId").val(@ViewBag.xiala);
+                    $("#UserName").val(d.data.userName);
+                    $("#UserPwd").val(d.data.userPwd);
+                    $("#UserSex").val(d.data.userSex);
+                    $("#UserCard").val(d.data.userCard);
+                    $("#UserPhone").val(d.data.userPhone);
+                    $("#UserNational").val(d.data.userNational);
+                    $("#UserEmail").val(d.data.userEmail);
+                    $("#UserMajor").val(d.data.userMajor);
+                    $("#UserJoinInDate").val(d.data.userJoinInDate);
+                    $("#UserDimissionDate").val(d.data.userDimissionDate);
+                    $("#UserDimissionCause").val(d.data.userDimissionCause);
+                    $("#UserDeleteMark").val(d.data.userDeleteMark);
+                    $("#UserIsAdmin").val(d.data.userIsAdmin);
+                    $("#UserCreateName").val(d.data.userCreateName);
+                    $("#UserCreateDate").val(d.data.userCreateDate);
+                    form.render();
+                }
+            })
+        })
+    });
+    </script>
+
+</body>
+</html>

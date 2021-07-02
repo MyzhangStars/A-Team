@@ -20,7 +20,6 @@ namespace IOA.Web.Controllers
         }
         public IActionResult LoggerTest()
         {
-            _logger.LogInformation("你访问了首页");
             _logger.LogWarning("警告信息");
             _logger.LogError("错误信息");
             return Content("success");
@@ -97,6 +96,7 @@ namespace IOA.Web.Controllers
         //首页
         public IActionResult HomePage()
         {
+            _logger.LogInformation("你访问了首页");
             return View();
         }
         #region //递归拼接菜单栏
