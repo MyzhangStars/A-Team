@@ -40,8 +40,9 @@ namespace IOA.Web.Controllers
         //注册
         public IActionResult Register(UserModel userModel)
         {
-            string userString = JsonConvert.SerializeObject(userModel);
-            string data = HttpClientHelper.GetAll(HttpType.HttpPost, "/UserAPI/UserRegister", new { userModel = userString });
+            //string userString = JsonConvert.SerializeObject(userModel);
+            string data = HttpClientHelper.GetAll(HttpType.HttpPost, "/UserAPI/UserRegister", userModel);
+
             if (Convert.ToInt32(data)>0)
             {
                 return Ok(1);

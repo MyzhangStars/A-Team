@@ -34,10 +34,10 @@ namespace IOA.API.Controllers
         //注册
         [Route(nameof(UserRegister))]
         [HttpPost]
-        public object UserRegister(object param)
+        public object UserRegister(UserModel userModel)
         {
-            string userString = JsonConvert.SerializeObject(param);
-            UserModel userModel = JsonConvert.DeserializeObject<UserModel>(userString);
+            //string userString = JsonConvert.SerializeObject(param);
+            //UserModel userModel = JsonConvert.DeserializeObject<UserModel>(userString);
             string sql = $"insert into UserModel(UserName,UserPwd,UserSex,UserCard,UserPhone,UserNational,UserEmail,UserMajor,UserJoinInDate,UserIsAdmin) values(@UserName,@UserPwd,UserSex,@UserCard,@UserPhone,@UserNational,@UserEmail,@UserMajor,@UserJoinInDate,@UserIsAdmin))";
             int i = _iuserRepositroy.ZSG(sql, new { @UserName = userModel.UserName, @UserPwd = userModel.UserPwd, UserSex = userModel.UserSex, @UserCard = userModel.UserCard, @UserPhone = userModel.UserPhone, @UserNational = userModel, @UserEmail = userModel.UserEmail, @UserMajor = userModel.UserMajor, @UserJoinInDate = userModel.UserJoinInDate, @UserIsAdmin = userModel.UserIsAdmin });
             return i;
