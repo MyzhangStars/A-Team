@@ -24,6 +24,7 @@ namespace IOA.Web
             services.AddSession();
             services.AddSingleton<IHomeRepositroy, HomeRepositroy>();
             services.AddSingleton<ILoginRepository, LoginRepository>();
+            services.AddSingleton<IBusinessRepositroy,BusinessRepositroy>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             ConfigurationHepler.configurations = Configuration.GetConnectionString("connStr");
 

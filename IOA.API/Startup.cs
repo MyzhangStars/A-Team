@@ -51,6 +51,7 @@ namespace IOA.API
             services.AddSingleton<IRoleRepositroy, RoleRepositroy>();
             services.AddSingleton<IMenuRepositroy, MenuRepositroy>();
             services.AddSingleton<IUserRepositroy, UserRepositroy>();
+            services.AddSingleton<IBusinessRepositroy, BusinessRepositroy>();
             ConfigurationHepler.configurations = Configuration.GetConnectionString("connStr");
 
             //services.AddCors(options =>

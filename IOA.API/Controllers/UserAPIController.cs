@@ -38,8 +38,8 @@ namespace IOA.API.Controllers
         {
             //string userString = JsonConvert.SerializeObject(param);
             //UserModel userModel = JsonConvert.DeserializeObject<UserModel>(userString);
-            string sql = $"insert into UserModel(UserName,UserPwd,UserSex,UserCard,UserPhone,UserNational,UserEmail,UserMajor,UserJoinInDate,UserIsAdmin) values(@UserName,@UserPwd,UserSex,@UserCard,@UserPhone,@UserNational,@UserEmail,@UserMajor,@UserJoinInDate,@UserIsAdmin))";
-            int i = _iuserRepositroy.ZSG(sql, new { @UserName = userModel.UserName, @UserPwd = userModel.UserPwd, UserSex = userModel.UserSex, @UserCard = userModel.UserCard, @UserPhone = userModel.UserPhone, @UserNational = userModel, @UserEmail = userModel.UserEmail, @UserMajor = userModel.UserMajor, @UserJoinInDate = userModel.UserJoinInDate, @UserIsAdmin = userModel.UserIsAdmin });
+            string sql = $"insert into UserModel(UserName,UserPwd,UserSex,UserCard,UserPhone,UserNational,UserEmail,UserMajor,UserJoinInDate,UserIsAdmin) values(@UserName,@UserPwd,@UserSex,@UserCard,@UserPhone,@UserNational,@UserEmail,@UserMajor,@UserJoinInDate,@UserIsAdmin))";
+            int i = _iuserRepositroy.ZSG(sql, new { @UserName = userModel.UserName, @UserPwd = userModel.UserPwd, @UserSex = userModel.UserSex, @UserCard = userModel.UserCard, @UserPhone = userModel.UserPhone, @UserNational = userModel.UserNational, @UserEmail = userModel.UserEmail, @UserMajor = userModel.UserMajor, @UserJoinInDate = userModel.UserJoinInDate, @UserIsAdmin = userModel.UserIsAdmin });
             return i;
         }
         //用户反填
