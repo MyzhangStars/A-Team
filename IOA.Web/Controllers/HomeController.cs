@@ -24,6 +24,8 @@ namespace IOA.Web.Controllers
             _logger.LogError("错误信息");
             return Content("success");
         }
+
+
         #region //foreach拼接菜单栏
         public IActionResult Index(int parentID, int userId)
         {
@@ -138,7 +140,6 @@ namespace IOA.Web.Controllers
             }
             leftData.Append(Data);
         }
-
         #endregion
 
         

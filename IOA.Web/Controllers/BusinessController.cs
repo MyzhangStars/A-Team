@@ -1,4 +1,5 @@
 ﻿using IOA.Common;
+using IOA.IRepository;
 using IOA.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,7 +12,7 @@ namespace IOA.Web.Controllers
     public class BusinessController : Controller
     {
         public readonly IBusinessRepositroy _ibusinessRepositroy;
-        public BusinessAPIController(IBusinessRepositroy businessRepositroy)
+        public BusinessController(IBusinessRepositroy businessRepositroy)
         {
             _ibusinessRepositroy = businessRepositroy;
         }
